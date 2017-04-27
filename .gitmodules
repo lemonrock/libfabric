@@ -1,0 +1,9 @@
+[submodule ".cargo"]
+	path = .cargo
+	url = https://github.com/lemonrock/.cargo.git
+[submodule "workspace/libfabric-sys/lib/libfabric"]
+	path = workspace/libfabric-sys/lib/libfabric
+	url = https://github.com/ofiwg/libfabric.git
+[submodule "workspace/libfabric-sys/tools/bindgen-wrapper"]
+	path = workspace/libfabric-sys/tools/bindgen-wrapper
+	url = https://github.com/lemonrock/bindgen-wrapper.git

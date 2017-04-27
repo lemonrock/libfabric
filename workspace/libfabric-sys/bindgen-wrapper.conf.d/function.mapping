@@ -1,0 +1,6 @@
+fi_dupinfo info
+fi_freeinfo info
+fi_getinfo info
+fi_freeparams param
+fi_getparams param
+fi_fabric fabric
