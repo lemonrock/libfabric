@@ -18,16 +18,9 @@ readme = "README.md"
 publish = false
 version = "0.0.0"
 
-[profile.release]
-opt-level = 3
-debug = false
-rpath = false
-lto = true
-debug-assertions = false
-codegen-units = 1
-
 [dependencies]
 libc = "0.2"
+rust_c = { version = "0.1.1", features = ["macro"] }
 
 [build-dependencies]
-rust_c = { version = "0.1.0", features = ["build"] }
+rust_c = { version = "0.1.1", features = ["build"] }
