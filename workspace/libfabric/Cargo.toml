@@ -19,4 +19,4 @@ publish = true
 version = "0.0.1"
 
 [dependencies]
-libfabric-sys = { path = "../libfabric-sys" }
+libfabric-sys = { path = "../libfabric-sys", version = "0.0.1" }
