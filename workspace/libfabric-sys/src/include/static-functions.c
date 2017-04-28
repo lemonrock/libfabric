@@ -44,13 +44,25 @@ ssize_t rust_fi_atomic(struct fid_ep * ep, const void * buf, size_t count, void 
 	return fi_atomic(ep, buf, count, desc, dest_addr, addr, key, datatype, op, context);
 }
 
-// ssize_t fi_atomicv(struct fid_ep * ep, const struct fi_ioc * iov, void * * desc, size_t count, fi_addr_t dest_addr, uint64_t addr, uint64_t key, enum fi_datatype datatype, enum fi_op op, void * context)
+ssize_t rust_fi_atomicv(struct fid_ep * ep, const struct fi_ioc * iov, void * * desc, size_t count, fi_addr_t dest_addr, uint64_t addr, uint64_t key, enum fi_datatype datatype, enum fi_op op, void * context)
+{
+	return fi_atomicv(ep, iov, desc, count, dest_addr, addr, key, datatype, op, context);
+}
 
-// ssize_t fi_atomicmsg(struct fid_ep * ep, const struct fi_msg_atomic * msg, uint64_t flags)
+ssize_t rust_fi_atomicmsg(struct fid_ep * ep, const struct fi_msg_atomic * msg, uint64_t flags)
+{
+	return fi_atomicmsg(ep, msg, flags);
+}
 
-// ssize_t fi_inject_atomic(struct fid_ep * ep, const void * buf, size_t count, fi_addr_t dest_addr, uint64_t addr, uint64_t key, enum fi_datatype datatype, enum fi_op op)
+ssize_t rust_fi_inject_atomic(struct fid_ep * ep, const void * buf, size_t count, fi_addr_t dest_addr, uint64_t addr, uint64_t key, enum fi_datatype datatype, enum fi_op op)
+{
+	return fi_inject_atomic(ep, buf, count, dest_addr, addr, key, datatype, op);
+}
 
-// ssize_t fi_fetch_atomic(struct fid_ep * ep, const void * buf, size_t count, void * desc, void * result, void * result_desc, fi_addr_t dest_addr, uint64_t addr, uint64_t key, enum fi_datatype datatype, enum fi_op op, void * context)
+ssize_t rust_fi_fetch_atomic(struct fid_ep * ep, const void * buf, size_t count, void * desc, void * result, void * result_desc, fi_addr_t dest_addr, uint64_t addr, uint64_t key, enum fi_datatype datatype, enum fi_op op, void * context)
+{
+	return fi_fetch_atomic(ep, buf, count, desc, result, result_desc, dest_addr, addr, key, datatype, op, context);
+}
 
 // ssize_t fi_fetch_atomicv(struct fid_ep * ep, const struct fi_ioc * iov, void * * desc, size_t count, struct fi_ioc * resultv, void * * result_desc, size_t result_count, fi_addr_t dest_addr, uint64_t addr, uint64_t key, enum fi_datatype datatype, enum fi_op op, void * context)
 

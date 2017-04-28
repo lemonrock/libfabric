@@ -10,7 +10,11 @@ extern "C"
 	pub fn rust_fi_alias(fid: *mut fid, alias_fid: *mut *mut fid, flags: u64) -> c_int;
 	pub fn rust_fi_allocinfo() -> *mut fi_info;
 	pub fn rust_fi_atomic(ep: *mut fid_ep, buf: *const c_void, count: usize, desc: *mut c_void, dest_addr: fi_addr_t, addr: u64, key: u64, datatype: fi_datatype, op: fi_op, context: *mut c_void) -> isize;
+	pub fn rust_fi_atomicmsg(ep: *mut fid_ep, msg: *const fi_msg_atomic, flags: u64) -> isize;
+	pub fn rust_fi_atomicv(ep: *mut fid_ep, iov: *const fi_ioc, desc: *mut *mut c_void, count: usize, dest_addr: fi_addr_t, addr: u64, key: u64, datatype: fi_datatype, op: fi_op, context: *mut c_void) -> isize;
 	pub fn rust_fi_close(fid: *mut fid) -> c_int;
 	pub fn rust_fi_control(fid: *mut fid, command: c_int, arg: *mut c_void) -> c_int;
+	pub fn rust_fi_fetch_atomic(ep: *mut fid_ep, buf: *const c_void, count: usize, desc: *mut c_void, result: *mut c_void, result_desc: *mut c_void, dest_addr: fi_addr_t, addr: u64, key: u64, datatype: fi_datatype, op: fi_op, context: *mut c_void) -> isize;
+	pub fn rust_fi_inject_atomic(ep: *mut fid_ep, buf: *const c_void, count: usize, dest_addr: fi_addr_t, addr: u64, key: u64, datatype: fi_datatype, op: fi_op) -> isize;
 	pub fn rust_fi_open_ops(fid: *mut fid, name: *const c_char, flags: u64, ops: *mut *mut c_void, context: *mut c_void) -> c_int;
 }
