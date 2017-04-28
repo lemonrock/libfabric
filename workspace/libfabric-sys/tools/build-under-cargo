@@ -161,8 +161,6 @@ build_under_cargo_generatingRustBindingsToLibfabricIfRquired()
 	
 	if [ ! -d "$rustBindingsFolderPath" ]; then
 		rebuildBindings='true'
-	elif ! diff "$copyHeadersToKnownLocationForEmbeddedCCodeInRustIncludeFolderPath" "$libfabricIncludeFolderPath" 1>/dev/null 2>/dev/null; then
-		rebuildBindings='true'
 	fi
 	
 	if $rebuildBindings; then
@@ -175,9 +173,9 @@ build_under_cargo_copyHeadersToKnownLocationForEmbeddedCCodeInRust()
 {
 	rm -rf "$copyHeadersToKnownLocationForEmbeddedCCodeInRustIncludeFolderPath"
 	mkdir -m 0700 -p "$copyHeadersToKnownLocationForEmbeddedCCodeInRustIncludeFolderPath"
-	rsync --quiet --archive "$libfabricIncludeFolderPath"/ "$copyHeadersToKnownLocationForEmbeddedCCodeInRustIncludeFolderPath"/
+	rsync --quiet --archive "$homeFolder"/tools/bindgen-wrapper/temporary/includes/ "$copyHeadersToKnownLocationForEmbeddedCCodeInRustIncludeFolderPath"/
 }
-
+# temporaryIncludeFolder
 build_under_cargo_outputCargoKeyValuePairs()
 {
 	printf 'cargo:rustc-link-lib=static-nobundle=libfabfic\n'

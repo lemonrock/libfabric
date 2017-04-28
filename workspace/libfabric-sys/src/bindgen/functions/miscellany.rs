@@ -7,4 +7,10 @@ extern "C"
 	pub fn fi_strerror(errnum: c_int) -> *const c_char;
 	pub fn fi_tostr(data: *const c_void, datatype: fi_type) -> *mut c_char;
 	pub fn fi_version() -> u32;
+	pub fn rust_fi_alias(fid: *mut fid, alias_fid: *mut *mut fid, flags: u64) -> c_int;
+	pub fn rust_fi_allocinfo() -> *mut fi_info;
+	pub fn rust_fi_atomic(ep: *mut fid_ep, buf: *const c_void, count: usize, desc: *mut c_void, dest_addr: fi_addr_t, addr: u64, key: u64, datatype: fi_datatype, op: fi_op, context: *mut c_void) -> isize;
+	pub fn rust_fi_close(fid: *mut fid) -> c_int;
+	pub fn rust_fi_control(fid: *mut fid, command: c_int, arg: *mut c_void) -> c_int;
+	pub fn rust_fi_open_ops(fid: *mut fid, name: *const c_char, flags: u64, ops: *mut *mut c_void, context: *mut c_void) -> c_int;
 }
