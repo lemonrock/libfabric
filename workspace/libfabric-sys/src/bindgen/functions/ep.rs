@@ -35,6 +35,7 @@ extern "C"
 	pub fn rust_fi_recvmsg(ep: *mut fid_ep, msg: *const fi_msg, flags: u64) -> isize;
 	pub fn rust_fi_recvv(ep: *mut fid_ep, iov: *const iovec, desc: *mut *mut c_void, count: usize, src_addr: fi_addr_t, context: *mut c_void) -> isize;
 	pub fn rust_fi_rx_context(ep: *mut fid_ep, index: c_int, attr: *mut fi_rx_attr, rx_ep: *mut *mut fid_ep, context: *mut c_void) -> c_int;
+	pub fn rust_fi_scalable_ep_bind(sep: *mut fid_ep, bfid: *mut fid, flags: u64) -> c_int;
 	pub fn rust_fi_send(ep: *mut fid_ep, buf: *const c_void, len: usize, desc: *mut c_void, dest_addr: fi_addr_t, context: *mut c_void) -> isize;
 	pub fn rust_fi_senddata(ep: *mut fid_ep, buf: *const c_void, len: usize, desc: *mut c_void, data: u64, dest_addr: fi_addr_t, context: *mut c_void) -> isize;
 	pub fn rust_fi_sendmsg(ep: *mut fid_ep, msg: *const fi_msg, flags: u64) -> isize;

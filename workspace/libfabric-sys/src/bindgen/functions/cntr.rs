@@ -6,7 +6,6 @@ extern "C"
 {
 	pub fn rust_fi_cntr_add(cntr: *mut fid_cntr, value: u64) -> c_int;
 	pub fn rust_fi_cntr_adderr(cntr: *mut fid_cntr, value: u64) -> c_int;
-	pub fn rust_fi_cntr_open(domain: *mut fid_domain, attr: *mut fi_cntr_attr, cntr: *mut *mut fid_cntr, context: *mut c_void) -> c_int;
 	pub fn rust_fi_cntr_read(cntr: *mut fid_cntr) -> u64;
 	pub fn rust_fi_cntr_readerr(cntr: *mut fid_cntr) -> u64;
 	pub fn rust_fi_cntr_set(cntr: *mut fid_cntr, value: u64) -> c_int;

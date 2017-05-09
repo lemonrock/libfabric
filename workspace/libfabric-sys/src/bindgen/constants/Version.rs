@@ -4,4 +4,4 @@
 
 pub const FI_MAJOR_VERSION: c_uint = 1;
 pub const FI_MINOR_VERSION: c_uint = 5;
-pub const FI_VERSION_MAX: _bindgen_ty_1 = 64;
+pub const FI_VERSION_MAX: _bindgen_ty_1 = _bindgen_ty_1::FI_NAME_MAX;

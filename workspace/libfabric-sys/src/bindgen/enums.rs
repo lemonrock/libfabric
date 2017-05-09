@@ -2,6 +2,14 @@
 // Copyright © 2016 The developers of libfabric. See the COPYRIGHT file in the top-level directory of this distribution and at https://raw.githubusercontent.com/lemonrock/libfabric/master/COPYRIGHT.
 
 
+include!("bindgen/enums/_bindgen_ty_1.rs");
+include!("bindgen/enums/_bindgen_ty_2.rs");
+include!("bindgen/enums/_bindgen_ty_3.rs");
+include!("bindgen/enums/_bindgen_ty_4.rs");
+include!("bindgen/enums/_bindgen_ty_5.rs");
+include!("bindgen/enums/_bindgen_ty_7.rs");
+include!("bindgen/enums/_bindgen_ty_8.rs");
+include!("bindgen/enums/_bindgen_ty_9.rs");
 include!("bindgen/enums/fi_av_type.rs");
 include!("bindgen/enums/fi_cntr_events.rs");
 include!("bindgen/enums/fi_cq_format.rs");

@@ -2,9 +2,10 @@
 // Copyright © 2016 The developers of libfabric. See the COPYRIGHT file in the top-level directory of this distribution and at https://raw.githubusercontent.com/lemonrock/libfabric/master/COPYRIGHT.
 
 
-pub const FI_ADDR_BGQ: _bindgen_ty_2 = 7;
-pub const FI_ADDR_GNI: _bindgen_ty_2 = 6;
-pub const FI_ADDR_MLX: _bindgen_ty_2 = 8;
-pub const FI_ADDR_PSMX: _bindgen_ty_2 = 5;
-pub const FI_ADDR_STR: _bindgen_ty_2 = 9;
-pub const FI_FORMAT_UNSPEC: _bindgen_ty_2 = 0;
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum _bindgen_ty_9
+{
+	FI_OPT_MIN_MULTI_RECV = 0,
+	FI_OPT_CM_DATA_SIZE = 1,
+}

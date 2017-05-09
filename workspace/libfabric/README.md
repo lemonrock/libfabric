@@ -12,4 +12,11 @@
 
 The license for this project is MIT.
 
+
+## Notes
+
+* See <https://www.slideshare.net/dgoodell/ofi-libfabric-tutorial>
+* See <https://www.slideshare.net/JianxinXiong/getting-started-with-libfabric>
+
+
 [libfabric]: https://github.com/lemonrock/libfabric "libfabric GitHub page"

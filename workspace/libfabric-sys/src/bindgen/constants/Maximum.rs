@@ -2,5 +2,5 @@
 // Copyright © 2016 The developers of libfabric. See the COPYRIGHT file in the top-level directory of this distribution and at https://raw.githubusercontent.com/lemonrock/libfabric/master/COPYRIGHT.
 
 
-pub const FI_NAME_MAX: _bindgen_ty_1 = 64;
-pub const FI_PATH_MAX: _bindgen_ty_1 = 256;
+pub const FI_NAME_MAX: _bindgen_ty_1 = _bindgen_ty_1::FI_NAME_MAX;
+pub const FI_PATH_MAX: _bindgen_ty_1 = _bindgen_ty_1::FI_PATH_MAX;

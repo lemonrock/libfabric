@@ -2,4 +2,4 @@
 // Copyright © 2016 The developers of libfabric. See the COPYRIGHT file in the top-level directory of this distribution and at https://raw.githubusercontent.com/lemonrock/libfabric/master/COPYRIGHT.
 
 
-pub const FI_OPT_ENDPOINT: _bindgen_ty_8 = 0;
+pub const FI_OPT_ENDPOINT: _bindgen_ty_8 = _bindgen_ty_8::FI_OPT_ENDPOINT;
