@@ -4,8 +4,9 @@
 
 extern "C"
 {
-	pub fn fi_dupinfo(info: *const fi_info) -> *mut fi_info;
-	pub fn fi_freeinfo(info: *mut fi_info);
-	pub fn fi_getinfo(version: u32, node: *const c_char, service: *const c_char, flags: u64, hints: *mut fi_info, info: *mut *mut fi_info) -> c_int;
-	pub fn rust_fi_allocinfo() -> *mut fi_info;
+	pub fn rust_fi_eq_read(eq: *mut fid_eq, event: *mut u32, buf: *mut c_void, len: usize, flags: u64) -> isize;
+	pub fn rust_fi_eq_readerr(eq: *mut fid_eq, buf: *mut fi_eq_err_entry, flags: u64) -> isize;
+	pub fn rust_fi_eq_sread(eq: *mut fid_eq, event: *mut u32, buf: *mut c_void, len: usize, timeout: c_int, flags: u64) -> isize;
+	pub fn rust_fi_eq_strerror(eq: *mut fid_eq, prov_errno: c_int, err_data: *const c_void, buf: *mut c_char, len: usize) -> *const c_char;
+	pub fn rust_fi_eq_write(eq: *mut fid_eq, event: u32, buf: *const c_void, len: usize, flags: u64) -> isize;
 }

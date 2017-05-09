@@ -4,8 +4,7 @@
 
 extern "C"
 {
-	pub fn fi_dupinfo(info: *const fi_info) -> *mut fi_info;
-	pub fn fi_freeinfo(info: *mut fi_info);
-	pub fn fi_getinfo(version: u32, node: *const c_char, service: *const c_char, flags: u64, hints: *mut fi_info, info: *mut *mut fi_info) -> c_int;
-	pub fn rust_fi_allocinfo() -> *mut fi_info;
+	pub fn rust_fi_poll(pollset: *mut fid_poll, context: *mut *mut c_void, count: c_int) -> c_int;
+	pub fn rust_fi_poll_add(pollset: *mut fid_poll, event_fid: *mut fid, flags: u64) -> c_int;
+	pub fn rust_fi_poll_del(pollset: *mut fid_poll, event_fid: *mut fid, flags: u64) -> c_int;
 }

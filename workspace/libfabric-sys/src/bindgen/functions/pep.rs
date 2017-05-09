@@ -4,8 +4,7 @@
 
 extern "C"
 {
-	pub fn fi_dupinfo(info: *const fi_info) -> *mut fi_info;
-	pub fn fi_freeinfo(info: *mut fi_info);
-	pub fn fi_getinfo(version: u32, node: *const c_char, service: *const c_char, flags: u64, hints: *mut fi_info, info: *mut *mut fi_info) -> c_int;
-	pub fn rust_fi_allocinfo() -> *mut fi_info;
+	pub fn rust_fi_listen(pep: *mut fid_pep) -> c_int;
+	pub fn rust_fi_pep_bind(pep: *mut fid_pep, bfid: *mut fid, flags: u64) -> c_int;
+	pub fn rust_fi_reject(pep: *mut fid_pep, handle: fid_t, param: *const c_void, paramlen: usize) -> c_int;
 }

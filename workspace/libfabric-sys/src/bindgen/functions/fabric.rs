@@ -5,4 +5,8 @@
 extern "C"
 {
 	pub fn fi_fabric(attr: *mut fi_fabric_attr, fabric: *mut *mut fid_fabric, context: *mut c_void) -> c_int;
+	pub fn rust_fi_domain(fabric: *mut fid_fabric, info: *mut fi_info, domain: *mut *mut fid_domain, context: *mut c_void) -> c_int;
+	pub fn rust_fi_passive_ep(fabric: *mut fid_fabric, info: *mut fi_info, pep: *mut *mut fid_pep, context: *mut c_void) -> c_int;
+	pub fn rust_fi_trywait(fabric: *mut fid_fabric, fids: *mut *mut fid, count: c_int) -> c_int;
+	pub fn rust_fi_wait_open(fabric: *mut fid_fabric, attr: *mut fi_wait_attr, waitset: *mut *mut fid_wait) -> c_int;
 }

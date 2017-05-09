@@ -4,8 +4,10 @@
 
 extern "C"
 {
-	pub fn fi_dupinfo(info: *const fi_info) -> *mut fi_info;
-	pub fn fi_freeinfo(info: *mut fi_info);
-	pub fn fi_getinfo(version: u32, node: *const c_char, service: *const c_char, flags: u64, hints: *mut fi_info, info: *mut *mut fi_info) -> c_int;
-	pub fn rust_fi_allocinfo() -> *mut fi_info;
+	pub fn rust_fi_mr_bind(mr: *mut fid_mr, bfid: *mut fid, flags: u64) -> c_int;
+	pub fn rust_fi_mr_desc(mr: *mut fid_mr) -> *mut c_void;
+	pub fn rust_fi_mr_enable(mr: *mut fid_mr) -> c_int;
+	pub fn rust_fi_mr_key(mr: *mut fid_mr) -> u64;
+	pub fn rust_fi_mr_raw_attr(mr: *mut fid_mr, base_addr: *mut u64, raw_key: *mut u8, key_size: *mut usize, flags: u64) -> c_int;
+	pub fn rust_fi_mr_refresh(mr: *mut fid_mr, iov: *const iovec, count: usize, flags: u64) -> c_int;
 }
