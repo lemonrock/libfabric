@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/workspace/nvml/nvml.iml" filepath="$PROJECT_DIR$/workspace/nvml/nvml.iml" />
-      <module fileurl="file://$PROJECT_DIR$/workspace/nvml-sys/nvml-sys.iml" filepath="$PROJECT_DIR$/workspace/nvml-sys/nvml-sys.iml" />
+      <module fileurl="file://$PROJECT_DIR$/workspace/libfabric/libfabric.iml" filepath="$PROJECT_DIR$/workspace/libfabric/libfabric.iml" />
+      <module fileurl="file://$PROJECT_DIR$/workspace/libfabric-sys/libfabric-sys.iml" filepath="$PROJECT_DIR$/workspace/libfabric-sys/libfabric-sys.iml" />
     </modules>
   </component>
 </project>
