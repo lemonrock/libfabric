@@ -3,7 +3,6 @@
 
 
 pub const FI_MR_ALLOCATED: c_uint = 32;
-pub const FI_MR_COMPLETE: _bindgen_ty_7 = 4;
 pub const FI_MR_ENDPOINT: c_uint = 512;
 pub const FI_MR_LOCAL: c_uint = 4;
 pub const FI_MR_MMU_NOTIFY: c_uint = 128;

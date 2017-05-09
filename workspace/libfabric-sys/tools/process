@@ -1,0 +1,44 @@
+#!/usr/bin/env sh
+
+
+# Converts:-
+# ssize_t|fi_fetch_atomicv,struct fid_ep *|ep,const struct fi_ioc *|iov,void * *|desc,size_t|count,struct fi_ioc *|resultv,void * *|result_desc,size_t|result_count,fi_addr_t|dest_addr,uint64_t|addr,uint64_t|key,enum fi_datatype|datatype,enum fi_op|op,void *|context
+# To:-
+# ssize_t rust_fi_fetch_atomicv(struct fid_ep * ep, const struct fi_ioc * iov, void * * desc, size_t count, struct fi_ioc * resultv, void * * result_desc, size_t result_count, fi_addr_t dest_addr, uint64_t addr, uint64_t key, enum fi_datatype datatype, enum fi_op op, void * context)
+# {
+# 	return fi_fetch_atomicv(ep, iov, desc, count, resultv, result_desc, result_count, dest_addr, addr, key, datatype, op, context);
+# }
+readLines()
+{
+	while IFS=',' read -r piece remainder
+	do
+		local type="${piece%|*}"
+		local name="${piece##*|}"
+		
+#		printf '%s rust_%s()\n{\n\treturn %sname();\n}\n\n' "$type" "$name" "$name"
+		
+		local arguments="$(printf '%s' "$remainder" | tr '|' ' ' | sed 's/,/, /g')"
+		
+		printf '%s rust_%s(%s)\n{\n\treturn %s(' "$type" "$name" "$arguments" "$name"
+		printf '%s' "$remainder" | tr ',' '\n' | awk -F'|' '{print $2}' |
+		{
+			isAfterFirst=false
+			
+			while IFS='' read -r argumentName
+			do
+				if $isAfterFirst; then
+					printf ', '
+				fi
+				printf "$argumentName"
+				isAfterFirst=true
+			done
+		}
+		
+		printf ');\n}\n\n'
+		
+		#echo "$remainder"
+		
+	done <bindings.txt
+}
+
+readLines
