@@ -13,6 +13,7 @@ extern crate rust_extra;
 
 
 use ::libc::c_ulonglong;
+use ::libc::c_void;
 use ::libfabric_sys::*;
 use ::rust_extra::unlikely;
 use ::std::marker::PhantomData;
@@ -28,6 +29,8 @@ include!("ControlCommand.rs");
 include!("EndpointProtocol.rs");
 include!("EventQueue.rs");
 include!("Fabric.rs");
+include!("FabricInterfaceDescriptor.rs");
+include!("FabricInterfaceDescriptorClass.rs");
 include!("Provider.rs");
 include!("TransportAddressFormat.rs");
 include!("Version.rs");

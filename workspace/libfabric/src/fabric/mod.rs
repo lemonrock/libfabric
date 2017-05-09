@@ -9,7 +9,6 @@ use ::std::mem::uninitialized;
 use ::std::sync::Arc;
 
 
-include!("Domain.rs");
 include!("PassiveEndpoint.rs");
 include!("FabricInterfaceDescriptor.rs");
 include!("FabricInterfaceDescriptorClass.rs");

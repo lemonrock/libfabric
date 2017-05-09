@@ -5,11 +5,36 @@
 #[derive(Debug)]
 pub struct EventQueue(*mut fid_eq);
 
-impl EventQueue
+impl Drop for EventQueue
 {
 	#[inline(always)]
-	fn fromHandle(handle: *mut fid_eq) -> Self
+	fn drop(&mut self)
 	{
+		self.close()
+	}
+}
+
+impl FabricInterfaceDescriptor for EventQueue
+{
+	type F = fid_eq;
+	
+	#[doc(hidden)]
+	#[inline(always)]
+	fn fromHandle(handle: *mut Self::F) -> Self
+	{
+		debug_assert!(!handle.is_null(), "handle is null");
+		
 		EventQueue(handle)
 	}
+	
+	#[doc(hidden)]
+	#[inline(always)]
+	fn fid(&self) -> *mut fid
+	{
+		self.0 as *mut _
+	}
+}
+
+impl EventQueue
+{
 }

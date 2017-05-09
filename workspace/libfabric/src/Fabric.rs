@@ -5,16 +5,40 @@
 #[derive(Debug)]
 pub struct Fabric(*mut fid_fabric);
 
+impl Drop for Fabric
+{
+	#[inline(always)]
+	fn drop(&mut self)
+	{
+		self.close()
+	}
+}
+
+impl FabricInterfaceDescriptor for Fabric
+{
+	type F = fid_fabric;
+	
+	#[doc(hidden)]
+	#[inline(always)]
+	fn fromHandle(handle: *mut Self::F) -> Self
+	{
+		debug_assert!(!handle.is_null(), "handle is null");
+		
+		Fabric(handle)
+	}
+	
+	#[doc(hidden)]
+	#[inline(always)]
+	fn fid(&self) -> *mut fid
+	{
+		self.0 as *mut _
+	}
+}
+
 /// Represents a logical or physical network with shared addresses
 /// May potentially span multiple providers
 impl Fabric
 {
-	#[inline(always)]
-	fn fromHandle(handle: *mut fid_fabric) -> Self
-	{
-		Fabric(handle)
-	}
-	
 	pub fn openDomain(&self)
 	{
 		// pub fn rust_fi_domain(fabric: *mut fid_fabric, info: *mut fi_info, domain: *mut *mut fid_domain, context: *mut c_void) -> c_int;
