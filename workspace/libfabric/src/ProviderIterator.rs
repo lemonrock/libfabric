@@ -29,13 +29,17 @@ impl Iterator for ProviderIterator
 	#[inline(always)]
 	fn next(&mut self) -> Option<Self::Item>
 	{
-		if unlikely(self.next.is_null())
+		let next = self.next;
+		
+		self.next = unsafe { *next }.next;
+		
+		if unlikely(next.is_null())
 		{
 			None
 		}
 		else
 		{
-			Some(Provider::fromHandle(Provider::duplicate(self.next)))
+			Some(Provider::fromHandle(Provider::duplicate(next)))
 		}
 	}
 }
