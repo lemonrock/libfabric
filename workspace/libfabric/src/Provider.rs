@@ -44,6 +44,17 @@ impl Provider
 		duplicate
 	}
 	
+	#[inline(always)]
+	pub fn allocateForHints() -> Provider
+	{
+		let handle = unsafe { rust_fi_allocinfo() };
+		if unlikely(handle.is_null())
+		{
+			panic!("Could not allocate, probably due to lack of memory");
+		}
+		Provider(handle)
+	}
+	
 	pub fn createFabric(&self) -> Fabric
 	{
 		let mut handle: *mut fid_fabric = unsafe { uninitialized() };
