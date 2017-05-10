@@ -3,117 +3,52 @@
 
 
 #[derive(Debug)]
-pub struct Provider<'a>
-{
-	handle: *mut fi_info,
-	weShouldFreeHandle: *mut fi_info,
-	phantomData: PhantomData<&'a fi_info>
-}
+pub struct Provider(*mut fi_info);
 
-impl<'a> Drop for Provider<'a>
+impl Drop for Provider
 {
 	#[inline(always)]
 	fn drop(&mut self)
 	{
-		if !self.weShouldFreeHandle.is_null()
-		{
-			unsafe { fi_freeinfo(self.weShouldFreeHandle) }
-		}
+		unsafe { fi_freeinfo(self.0) }
 	}
 }
 
-impl<'a> Provider<'a>
+impl Clone for Provider
 {
-	/*
-	 For example: struct fi_info *hints, *fi; hints = fi_allocinfo(); hints->ep_attr->type = FI_RDM; hints->caps = FI_MSG | FI_TAGGED | FI_RMA; hints->mode = FI_CONTEXT; hints->fabric_attr->prov_name = strdup(“psm2”); err = fi_getinfo(FI_VERSION(1,0), NULL, NULL, 0, hints, &fi);
-	 
-	
-	pub src_addrlen: usize,
-	pub dest_addrlen: usize,
-	pub src_addr: *mut c_void,
-	pub dest_addr: *mut c_void,
-	
-	pub handle: fid_t,
-	pub tx_attr: *mut fi_tx_attr,
-	pub rx_attr: *mut fi_rx_attr,
-	pub ep_attr: *mut fi_ep_attr,
-	pub domain_attr: *mut fi_domain_attr,
-	
-	*/
-	pub fn discoverProviders(ourVersion: Version) -> Option<Provider<'a>>
+	#[inline(always)]
+	fn clone(&self) -> Provider
 	{
-		let mut firstProvider: *mut fi_info = unsafe { uninitialized() };
+		Provider::fromHandle(Self::duplicate(self.0))
+	}
+}
+
+impl Provider
+{
+	#[inline(always)]
+	fn fromHandle(handle: *mut fi_info) -> Provider
+	{
+		debug_assert!(!handle.is_null(), "handle is null");
 		
-		panic_on_error!("fi_getinfo", unsafe { fi_getinfo(ourVersion.toCombinedValue(), null_mut(), null_mut(), 0, null_mut(), &mut firstProvider) });
-		
-		if unlikely(firstProvider.is_null())
-		{
-			None
-		}
-		else
-		{
-			Some
-			(
-				Self
-				{
-					handle: firstProvider,
-					weShouldFreeHandle: firstProvider,
-					phantomData: PhantomData,
-				}
-			)
-		}
+		Provider(handle)
 	}
 	
-	pub fn next_move(self) -> Option<Provider<'a>>
+	#[inline(always)]
+	fn duplicate(handle: *mut fi_info) -> *mut fi_info
 	{
-		let next = unsafe { *self.handle }.next;
-		
-		if unlikely(next.is_null())
+		let duplicate = unsafe { fi_dupinfo(handle) };
+		if unlikely(duplicate.is_null())
 		{
-			None
+			panic!("Could not duplicate, probably due to lack of memory");
 		}
-		else
-		{
-			Some
-			(
-				Self
-				{
-					handle: next,
-					weShouldFreeHandle: self.handle,
-					phantomData: PhantomData,
-				}
-			)
-		}
-	}
-	
-	pub fn next<'b>(&'a self) -> Option<Provider<'b>>
-	where 'a : 'b
-	{
-		let next = unsafe { *self.handle }.next;
-		
-		if unlikely(next.is_null())
-		{
-			None
-		}
-		else
-		{
-			Some
-			(
-				Self
-				{
-					handle: next,
-					weShouldFreeHandle: null_mut(),
-					phantomData: PhantomData,
-				}
-			)
-		}
+		duplicate
 	}
 	
 	pub fn createFabric(&self) -> Fabric
 	{
 		let mut handle: *mut fid_fabric = unsafe { uninitialized() };
 		let userSpecifiedContextReturnedWithAsynchronousEvents = null_mut();
-		panic_on_error!("fi_fabric", unsafe { fi_fabric((*self.handle).fabric_attr, &mut handle, userSpecifiedContextReturnedWithAsynchronousEvents) });
+		panic_on_error!("fi_fabric", unsafe { fi_fabric((*self.0).fabric_attr, &mut handle, userSpecifiedContextReturnedWithAsynchronousEvents) });
 		
 		Fabric::fromHandle(handle)
 	}
@@ -121,7 +56,7 @@ impl<'a> Provider<'a>
 	// Look at fi_getinfo.3.md
 	fn supportsCapability(&self, capabilityBit: c_ulonglong) -> bool
 	{
-		unsafe { *self.handle }.caps & capabilityBit == capabilityBit
+		unsafe { *self.0 }.caps & capabilityBit == capabilityBit
 	}
 	
 	pub fn supportsPrimaryCapabilitySendingAndReceivingMessages(&self) -> bool
@@ -198,7 +133,7 @@ impl<'a> Provider<'a>
 	// Look at fi_getinfo.3.md
 	fn applicationMustSupplySupportFor(&self, modeBit: c_ulonglong) -> bool
 	{
-		unsafe { *self.handle }.mode & modeBit == modeBit
+		unsafe { *self.0 }.mode & modeBit == modeBit
 	}
 	
 	pub fn applicationMustSupplySupportForContext(&self) -> bool
@@ -244,6 +179,6 @@ impl<'a> Provider<'a>
 	
 	pub fn transportAddressFormat(&self) -> TransportAddressFormat
 	{
-		unsafe { transmute((*self.handle).addr_format) }
+		unsafe { transmute((*self.0).addr_format) }
 	}
 }
