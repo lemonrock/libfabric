@@ -18,6 +18,7 @@ use ::libfabric_sys::*;
 use ::rust_extra::unlikely;
 use ::std::mem::transmute;
 use ::std::mem::uninitialized;
+use ::std::ptr::null;
 use ::std::ptr::null_mut;
 
 

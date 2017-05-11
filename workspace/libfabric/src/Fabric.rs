@@ -39,15 +39,16 @@ impl FabricInterfaceDescriptor for Fabric
 /// May potentially span multiple providers
 impl Fabric
 {
-	// Needs the original provider, fi_info, and modifies it
-	pub fn openDomain(&self) -> Domain
+	/// 'Modify' the provider to change domain characteristics
+	pub fn openDomain(&self, provider: &Provider) -> Domain
 	{
-//		let mut handle: *mut fid_domain = unsafe { uninitialized() };
-//
-//		panic_on_error!("rust_fi_domain", unsafe { rust_fi_domain(self.0, &mut fi_info, &mut handle, null_mut()) });
-//
-//		Domain::fromHandle(handle)
-		panic!();
+		// seems to use addr_format and dest_addr in addition to domain attr
+		
+		let mut handle = unsafe { uninitialized() };
+
+		panic_on_error!("rust_fi_domain", unsafe { rust_fi_domain(self.0, provider.0, &mut handle, null_mut()) });
+
+		Domain::fromHandle(handle)
 	}
 	
 	pub fn openPassiveEndpoint(&self)
@@ -67,7 +68,7 @@ impl Fabric
 			wait_set: null_mut(),
 		};
 		
-		let mut handle: *mut fid_eq = unsafe { uninitialized() };
+		let mut handle = unsafe { uninitialized() };
 		
 		panic_on_error!("rust_fi_eq_open", unsafe { rust_fi_eq_open(self.0, &mut eventQueueAttributes, &mut handle, null_mut()) });
 		

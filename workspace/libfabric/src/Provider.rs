@@ -57,7 +57,7 @@ impl Provider
 	
 	pub fn createFabric(&self) -> Fabric
 	{
-		let mut handle: *mut fid_fabric = unsafe { uninitialized() };
+		let mut handle = unsafe { uninitialized() };
 		let userSpecifiedContextReturnedWithAsynchronousEvents = null_mut();
 		panic_on_error!("fi_fabric", unsafe { fi_fabric((*self.0).fabric_attr, &mut handle, userSpecifiedContextReturnedWithAsynchronousEvents) });
 		
